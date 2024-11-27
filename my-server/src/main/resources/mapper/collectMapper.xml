@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pri.yqx.user.mapper.CollectMapper">
+
+<!--    <select id="getCollectNum" resultType="pri.yqx.vo.CollectNumVo">-->
+<!--        select case co.collect_id when null then false else true end as isCollected,co.good_id,co1.collectNum from wx_collect co inner join-->
+<!--        (select count(*) collectNum,c.good_id from wx_collect c group by c.good_id) co1 on co.good_id=co1.good_id-->
+<!--        where co.good_id=#{goodId} and co.user_id=#{userId}-->
+<!--    </select>-->
+
+</mapper>

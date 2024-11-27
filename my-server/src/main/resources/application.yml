@@ -1,0 +1,67 @@
+spring:
+  main:
+    allow-circular-references: true
+  profiles:
+    active: dev
+  jackson:
+    #  格式化返回时间 yyyy-MM-dd HH:mm:ss
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  redis:
+    host: 110.41.32.97
+    port: 6379
+    password: 1932829174a
+    database: 0
+    # 解决redis 240秒超时问题
+    lettuce:
+      pool:
+        max-active: 8
+        min-idle: 2
+        max-idle: 3
+        max-wait: -1
+      shutdown-timeout: 100
+    timeout: 5000
+  datasource:
+    hikari:
+      max-lifetime: 60000
+    username: yqx
+    url: jdbc:mysql://110.41.32.97:3306/weiapp
+    password: 1932829174a
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      table-prefix: wx_
+#微信服务器密钥
+wechat:
+  app-id: wxf5df1890a4748e65
+  app-secret: 8ba41e7df23ca7733151a6b42af3880f
+  login-url: https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code
+  phone-number-url: https://api.weixin.qq.com/wxa/business/getuserphonenumber
+oss:
+  access-key: J0t_zI1a1lRNJ9OLmnwYoEs5NJzpREwRePkP7b2U
+  secret-key: dcAT3Uizve0DzKY7VOo4Nq8RIXMqLnX8ZDFaa5P0
+  bucket: yqx-storage
+  host: http://sge9cddv1.hn-bkt.clouddn.com/
+  tmp-file: ${storage.tmp-file}
+  tmp-file1: ${storage.tmp-file1}
+server:
+  port: 7001
+  servlet:
+    context-path: /api
+rocketmq:
+  name-server: 110.41.32.97:9876
+  producer:
+    group: powernode-group        # 生产者组别
+    send-message-timeout: 3000  # 消息发送的超时时间
+    retry-times-when-send-async-failed: 2  # 异步消息发送失败重试次数
+    max-message-size: 4194304       # 消息的最大长度
+cache:
+  ttl: '{"user":60,"dept":30}'

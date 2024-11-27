@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pri.yqx.order.mapper.OrderMapper">
+
+    <select id="getOrderPage" parameterType="pri.yqx.order.domain.dto.OrderCursorReq" resultType="pri.yqx.order.domain.entity.OrderUnion">
+        select o.order_id,o.good_id,o.total_price,o.status,o.buy_num,o.create_time,o.deal_time,
+               i.order_info_id,i.user_id,i.deal_user_id,i.is_buyer
+        from wx_order o inner join wx_order_info i on o.order_id=i.order_id
+                 where i.user_id=#{userId} and i.is_buyer=#{dto.isBuyer} and i.is_deleted=false
+                 <if test="dto.cursor!=0">and o.order_id &lt;= #{dto.cursor} </if>
+                 <if test="dto.status!=-1">and o.status= #{dto.status}</if>
+                order by o.order_id desc limit #{dto.pageSize};
+    </select>
+    <select id="getOrderUnion" resultType="pri.yqx.order.domain.entity.OrderUnion">
+        select o.order_id,o.good_id,o.total_price,o.status,o.buy_num,o.create_time,o.deal_time,o.address,o.receiver,
+              o.phone_number, i.order_info_id,i.user_id,i.deal_user_id,i.is_buyer
+        from wx_order o inner join wx_order_info i on o.order_id=i.order_id where i.user_id=#{userId} and o.order_id=#{orderId}
+    </select>
+</mapper>

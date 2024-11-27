@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pri.yqx.user.mapper.AddressMapper">
+
+
+    <select id="getAddressVoList" resultType="pri.yqx.user.domain.vo.AddressVo">
+        select ad.dormi_num,do.dormi_name,do.school,do.zone,ad.receiver,ad.phone_number,ad.is_default,ad.address_id
+        from wx_address ad left join wx_dormitory do on ad.dormitory_id=do.dormitory_id
+        where ad.is_deleted=0 and ad.user_id=#{userId}
+    </select>
+</mapper>

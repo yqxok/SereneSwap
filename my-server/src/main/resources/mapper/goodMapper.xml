@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pri.yqx.good.mapper.GoodMapper">
+
+
+</mapper>
+
+<!--        select g.good_id,g.html,g.pic_urls,g.price,u.user_id,u.user_name,u.profile_pic_url-->
+<!--        from wx_good g left join wx_user u on g.user_id=u.user_id-->
+<!--<if test="categoryName!=null">left join wx_good_category ca on g.good_id=ca.good_id</if>-->
+<!--        where g.is_deleted!=1 and g.status=0-->
+<!--<if test="categoryName!=null">and ca.category_name=#{categoryName} </if>-->
+<!--        limit #{index},#{size}-->
