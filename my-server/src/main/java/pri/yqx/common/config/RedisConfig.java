@@ -1,4 +1,4 @@
-package pri.yqx.common.serialize;
+package pri.yqx.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,16 +9,14 @@ import pri.yqx.common.serialize.FastJsonRedisSerializer;
 
 @Configuration
 public class RedisConfig {
-    public RedisConfig() {
-    }
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory factory) {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        RedisTemplate<String, Object> template = new RedisTemplate();
         factory.setValidateConnection(true);
         template.setConnectionFactory(factory);
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
+        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer(Object.class);
         template.setKeySerializer(stringRedisSerializer);
         template.setValueSerializer(fastJsonRedisSerializer);
         template.setHashKeySerializer(stringRedisSerializer);

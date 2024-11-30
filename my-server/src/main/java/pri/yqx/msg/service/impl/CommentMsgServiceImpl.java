@@ -29,6 +29,7 @@ import pri.yqx.msg.domain.vo.CmMsgRoomtVo;
 import pri.yqx.msg.domain.vo.CommentMsgVo;
 import pri.yqx.msg.mapper.CommentMsgMapper;
 import pri.yqx.msg.service.CommentMsgService;
+import pri.yqx.msg.service.MsgRoomService;
 import pri.yqx.msg.service.adapter.CommentMsgAdapter;
 import pri.yqx.user.domain.entity.User;
 import pri.yqx.user.service.cache.UserCache;
@@ -44,18 +45,20 @@ public class CommentMsgServiceImpl extends ServiceImpl<CommentMsgMapper, Comment
     private UserCache userCache;
     @Resource
     private MsgRoomDao msgRoomDao;
+    @Resource
+    private MsgRoomService msgRoomService;
 
-    public CommentMsgServiceImpl() {
-    }
 
     public void saveCommmentMsg(CommentMsgDto cmDto) {
         this.commentMsgDao.save(this.build(cmDto));
-        MsgRoom msgRoom = this.msgRoomDao.getMsgRoom(cmDto.getReceiverId(), MsgRoomType.COMMENT_ROOM);
-        this.msgRoomDao.updateById((new MsgRoom()).setMsgRoomId(msgRoom.getMsgRoomId()).setVersion(msgRoom.getVersion()).setNoReadNum(msgRoom.getNoReadNum() + 1));
+        this.msgRoomService.noReadMsgAdd(cmDto.getReceiverId(), 1, MsgRoomType.COMMENT_ROOM, MsgRoomType.TOTAL_MSG_ROOM);
+
     }
 
     private CommentMsg build(CommentMsgDto cmDto) {
-        return (new CommentMsg()).setCommentId(cmDto.getCommentId()).setGoodId(cmDto.getGoodId()).setSenderId(cmDto.getSenderId()).setReceiverId(cmDto.getReceiverId()).setType(cmDto.getType()).setContent(cmDto.getContent());
+        return new CommentMsg().setCommentId(cmDto.getCommentId()).setGoodId(cmDto.getGoodId())
+                .setSenderId(cmDto.getSenderId()).setReceiverId(cmDto.getReceiverId())
+                .setType(cmDto.getType()).setContent(cmDto.getContent());
     }
 
     public CursorPageVo<CommentMsgVo> getCursorPage(Long userId, CursorReq cursorReq) {

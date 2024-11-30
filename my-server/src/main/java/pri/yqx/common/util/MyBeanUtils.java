@@ -31,36 +31,27 @@ public class MyBeanUtils {
     }
 
     public static <T, R> List<R> getPropertyList(Collection<T> collection, Function<T, R> function) {
-        return (List)(CollectionUtil.isEmpty(collection) ? new ArrayList() : (List)collection.stream().map(function).collect(Collectors.toList()));
+        return CollectionUtil.isEmpty(collection) ? new ArrayList<>() : collection.stream().map(function).collect(Collectors.toList());
     }
 
     public static <T, R> Set<R> getPropertySet(Collection<T> collection, Function<T, R> function) {
-        return (Set)(CollectionUtil.isEmpty(collection) ? new HashSet() : (Set)collection.stream().map(function).collect(Collectors.toSet()));
+        return CollectionUtil.isEmpty(collection) ? new HashSet<>() : collection.stream().map(function).collect(Collectors.toSet());
     }
 
     public static <T> Map<Long, T> transMap(Set<T> set, Function<T, Long> function) {
-        return (Map)(CollectionUtil.isEmpty(set) ? new HashMap() : (Map)set.stream().collect(Collectors.toMap(function, (i) -> {
-            return i;
-        })));
+        return CollectionUtil.isEmpty(set) ? new HashMap<>() : set.stream().collect(Collectors.toMap(function, Function.identity()));
     }
 
     public static <T, R> List<Set<R>> getPropertySetList(Collection<T> collection, Function<T, R>... function) {
-        ArrayList<Set<R>> list = new ArrayList();
-
+        ArrayList<Set<R>> list = new ArrayList<>();
         for(int i = 0; i < function.length; ++i) {
-            list.add(new HashSet());
+            list.add(new HashSet<>());
         }
-
-        Iterator var6 = collection.iterator();
-
-        while(var6.hasNext()) {
-            T item = (T) var6.next();
-
+        for (T item : collection) {
             for(int j = 0; j < list.size(); ++j) {
-                ((Set)list.get(j)).add(function[j].apply(item));
+                list.get(j).add(function[j].apply(item));
             }
         }
-
         return list;
     }
 }

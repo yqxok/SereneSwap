@@ -15,10 +15,7 @@ import pri.yqx.websocket.service.WebSocketService;
 import pri.yqx.websocket.service.WsMsgType;
 
 @Component
-@RocketMQMessageListener(
-    topic = "chat_msg",
-    consumerGroup = "chat_group"
-)
+@RocketMQMessageListener(topic = "chat_msg", consumerGroup = "chat_group")
 public class MsgSendConsumer implements RocketMQListener<ChatMsgDto> {
     private static final Logger log = LoggerFactory.getLogger(MsgSendConsumer.class);
     @Resource
@@ -27,8 +24,6 @@ public class MsgSendConsumer implements RocketMQListener<ChatMsgDto> {
     private ChatContentDao chatContentDao;
 
 
-    public MsgSendConsumer() {
-    }
 
     public void onMessage(ChatMsgDto chatMsgDto) {
         log.warn("我收到消息了={}", chatMsgDto);

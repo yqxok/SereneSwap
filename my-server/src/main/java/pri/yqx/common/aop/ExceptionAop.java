@@ -21,17 +21,13 @@ import pri.yqx.common.exception.SystemException;
 public class ExceptionAop {
     private static final Logger log = LoggerFactory.getLogger(ExceptionAop.class);
 
-    public ExceptionAop() {
-    }
+
 
     @Pointcut("execution(* pri.yqx.*.service.impl.*.*(..))")
     public void pointCut() {
     }
 
-    @AfterThrowing(
-        value = "pointCut()",
-        throwing = "exception"
-    )
+    @AfterThrowing(value = "pointCut()", throwing = "exception")
     public void doAfterThrowingAdvice(JoinPoint joinPoint, Throwable exception) {
         if (exception instanceof BusinessException) {
             throw (BusinessException)exception;

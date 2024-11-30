@@ -1,4 +1,4 @@
-package pri.yqx.common.serialize;
+package pri.yqx.common.config;
 
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;

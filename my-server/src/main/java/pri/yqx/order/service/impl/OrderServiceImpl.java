@@ -5,6 +5,7 @@
 
 package pri.yqx.order.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -68,7 +69,7 @@ public class OrderServiceImpl implements OrderService {
 
     public OrderServiceImpl() {
     }
-
+    @Override
     public CursorPageVo<OrderVo> getCursorPage(Long userId, OrderCursorReq cursorDto) {
         CursorPageVo<OrderUnion> cursorPage = this.orderDao.getCursorPage(userId, cursorDto);
         List<Set<Long>> relateId = MyBeanUtils.getPropertySetList(cursorPage.getList(), OrderUnion::getGoodId, OrderUnion::getDealUserId);
@@ -76,7 +77,7 @@ public class OrderServiceImpl implements OrderService {
         Map<Long, User> userMap = this.userCache.getAllCache(relateId.get(1));
         return OrderAdapter.buildOrderVoCursorPage(cursorPage, userMap, goodMap);
     }
-
+    @Override
     public OrderDetailVo getOrderDetail(Long userId, Long orderId) {
         OrderUnion orderUnion = this.orderDao.getOrderUnion(userId, orderId);
         AssertUtil.isEmpty(orderUnion, "orderId无效");
@@ -84,7 +85,7 @@ public class OrderServiceImpl implements OrderService {
         Good good = this.goodCache.getCache(orderUnion.getGoodId());
         return OrderAdapter.buildOrderVo(orderUnion, dealUser, good);
     }
-
+    @Override
     @Transactional
     public void updateStatus(Long userId, StatusReq statusReq) {
         OrderUnion order = this.orderDao.getOrderUnion(userId, statusReq.getOrderId());
@@ -100,7 +101,7 @@ public class OrderServiceImpl implements OrderService {
         this.orderDao.updateById(order1);
         this.applicationContext.publishEvent(new OrderEvent(this, new OrderMsgDto(order.getOrderId(), statusReq.getStatus(), order.getDealUserId())));
     }
-
+    @Override
     @Transactional
     public Long saveOrder(Long userId, OrderReq orderReq) {
         Good good = this.goodCache.getCache(orderReq.getGoodId());
@@ -118,9 +119,15 @@ public class OrderServiceImpl implements OrderService {
         this.applicationContext.publishEvent(new OrderEvent(this, new OrderMsgDto(order.getOrderId(), OrderStatusEnum.DEALING.getStatus(), good.getUserId())));
         return orderId;
     }
-
+    @Override
     public OrderUnion getOrder(Long userId, Long orderId) {
         return this.orderDao.getOrderUnion(userId, orderId);
+    }
+
+    @Override
+    public void deleteOrder(Long userId, Long orderId) {
+        orderInfoDao.lambdaUpdate().eq(OrderInfo::getUserId,userId)
+                .eq(OrderInfo::getOrderId,orderId).set(OrderInfo::getIsDeleted,true).update();
     }
 
     private List<OrderInfo> buildOrderInfos(Order order, Long userId, Good good) {

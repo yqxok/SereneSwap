@@ -32,8 +32,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Resource
     private GoodCatogryDao goodCatogryDao;
 
-    public CategoryServiceImpl() {
-    }
 
     public void saveCategory(Long userId, CategoryReq categoryReq) {
         String categoryName = categoryReq.getCategoryName();

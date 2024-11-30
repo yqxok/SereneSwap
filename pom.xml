@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>my-server</module>
+        <module>sensitive-grep</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

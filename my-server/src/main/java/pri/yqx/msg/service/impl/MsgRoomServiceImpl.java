@@ -65,13 +65,9 @@ public class MsgRoomServiceImpl implements MsgRoomService {
 
     public void noReadMsgAdd(Long userId, Integer num, MsgRoomType... types) {
         List<MsgRoom> msgRooms = this.msgRoomDao.getMsgRooms(userId, types);
-        Iterator var5 = msgRooms.iterator();
-
-        while(var5.hasNext()) {
-            MsgRoom msgRoom = (MsgRoom)var5.next();
-            msgRoom.setUpdateTime((LocalDateTime)null).setNoReadNum(msgRoom.getNoReadNum() + num);
+        for (MsgRoom msgRoom : msgRooms) {
+            msgRoom.setUpdateTime(null).setNoReadNum(msgRoom.getNoReadNum() + num);
         }
-
         this.msgRoomDao.updateBatchById(msgRooms);
     }
 }

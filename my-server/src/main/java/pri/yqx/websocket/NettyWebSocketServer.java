@@ -13,6 +13,8 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.NettyRuntime;
 import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import pri.yqx.websocket.handler.HttpHeadersHandler;
 import pri.yqx.websocket.handler.NettyWebSocketServerHandler;
@@ -20,10 +22,8 @@ import pri.yqx.websocket.handler.NettyWebSocketServerHandler;
 @Component
 public class NettyWebSocketServer {
     public static final NettyWebSocketServerHandler NETTY_WEB_SOCKET_SERVER_HANDLER = new NettyWebSocketServerHandler();
-    public static final int WEB_SOCKET_PORT = 7002;
-
-    public NettyWebSocketServer() {
-    }
+    @Value("${netty.port}")
+    private int WEB_SOCKET_PORT;
 
     @PostConstruct
     public void init() throws InterruptedException {
@@ -36,7 +36,12 @@ public class NettyWebSocketServer {
         ServerBootstrap serverBootstrap = ((ServerBootstrap)(new ServerBootstrap()).group(boss, worker).channel(NioServerSocketChannel.class)).childHandler(new ChannelInitializer<SocketChannel>() {
             protected void initChannel(SocketChannel socketChannel) throws Exception {
                 ChannelPipeline pipeline = socketChannel.pipeline();
-                pipeline.addLast(new ChannelHandler[]{new IdleStateHandler(10, 0, 0)}).addLast(new ChannelHandler[]{new HttpServerCodec()}).addLast(new ChannelHandler[]{new HttpObjectAggregator(8192)}).addLast(new ChannelHandler[]{new HttpHeadersHandler()}).addLast(new ChannelHandler[]{new WebSocketServerProtocolHandler("/netty")}).addLast(new ChannelHandler[]{NettyWebSocketServer.NETTY_WEB_SOCKET_SERVER_HANDLER});
+                pipeline.addLast(new IdleStateHandler(10, 0, 0))
+                        .addLast(new HttpServerCodec())
+                        .addLast(new HttpObjectAggregator(8192))
+                        .addLast(new HttpHeadersHandler())
+                        .addLast(new WebSocketServerProtocolHandler("/netty"))
+                        .addLast(NettyWebSocketServer.NETTY_WEB_SOCKET_SERVER_HANDLER);
             }
         });
         serverBootstrap.bind(7002).sync();

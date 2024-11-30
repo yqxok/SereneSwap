@@ -14,8 +14,6 @@ import pri.yqx.common.serialize.FastJsonRedisSerializer;
 
 @Configuration
 public class CacheConfig {
-    public CacheConfig() {
-    }
 
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {

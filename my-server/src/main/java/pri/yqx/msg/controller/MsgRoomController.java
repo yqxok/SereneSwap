@@ -20,8 +20,6 @@ public class MsgRoomController {
     @Resource
     private MsgRoomService msgRoomService;
 
-    public MsgRoomController() {
-    }
 
     @PutMapping
     public Result<String> msgRead(@RequestBody @Validated MsgTypeReq msgTypeReq) {

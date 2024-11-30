@@ -6,18 +6,19 @@
 package pri.yqx;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pri.yqx.sensitive.GrepFileLoader;
+import pri.yqx.sensitive.SensitiveWordConverter;
 
 public class Main {
-    public Main() {
-    }
 
     public static void main(String[] args) {
-        String[] strs = new String[]{"操你妈", "你妈死了", "操你大爷"};
-        TreeNodeBuilder builder = new TreeNodeBuilder(strs);
-        String str = builder.convertStr("我操妈死了De");
+        List<String> list = GrepFileLoader.loadGrepFile();
+        SensitiveWordConverter converter = new SensitiveWordConverter(list);
+        String str = converter.convertStr("滚,我操你妈的");
         System.out.println(str);
     }
 
@@ -91,6 +92,9 @@ public class Main {
         }
     }
 
+    /**
+     * 前缀树节点
+     */
     static class TreeNode {
         private Map<Character, TreeNode> nextNode = new HashMap();
 

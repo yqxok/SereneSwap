@@ -1,4 +1,4 @@
-package pri.yqx.common.serialize;
+package pri.yqx.common.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import java.time.LocalDateTime;
@@ -7,10 +7,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
-    public MyMetaObjectHandler() {
-    }
 
     public void insertFill(MetaObject metaObject) {
+
         this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
         this.strictUpdateFill(metaObject, "upTimeStamp", Long.class, System.currentTimeMillis());
         this.strictInsertFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());

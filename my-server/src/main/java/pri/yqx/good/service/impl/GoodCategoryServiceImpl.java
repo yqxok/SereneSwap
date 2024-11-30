@@ -8,6 +8,5 @@ import pri.yqx.good.service.GoodCategoryService;
 
 @Service
 public class GoodCategoryServiceImpl extends ServiceImpl<GoodCategoryMapper, GoodCategory> implements GoodCategoryService {
-    public GoodCategoryServiceImpl() {
-    }
+
 }

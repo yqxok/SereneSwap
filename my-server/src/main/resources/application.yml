@@ -63,5 +63,6 @@ rocketmq:
     send-message-timeout: 3000  # 消息发送的超时时间
     retry-times-when-send-async-failed: 2  # 异步消息发送失败重试次数
     max-message-size: 4194304       # 消息的最大长度
-cache:
-  ttl: '{"user":60,"dept":30}'
+netty:
+  port: 7002
+

@@ -6,6 +6,8 @@
 package pri.yqx.msg.consumer;
 
 import javax.annotation.Resource;
+
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
@@ -25,8 +27,9 @@ import pri.yqx.websocket.service.WsMsgType;
     consumerGroup = "comment_group",
     topic = "comment_msg"
 )
+@Slf4j
 public class CommentConsumer implements RocketMQListener<CommentMsgDto> {
-    private static final Logger log = LoggerFactory.getLogger(CommentConsumer.class);
+
     @Resource
     private CommentMsgDao commentMsgDao;
     @Resource
@@ -36,8 +39,6 @@ public class CommentConsumer implements RocketMQListener<CommentMsgDto> {
     @Resource
     private MsgRoomService msgRoomService;
 
-    public CommentConsumer() {
-    }
 
     public void onMessage(CommentMsgDto cmDto) {
         if (this.commentMsgDao.isExit(cmDto.getCommentId())) {
@@ -45,7 +46,7 @@ public class CommentConsumer implements RocketMQListener<CommentMsgDto> {
         } else {
             log.info("我收到消息了,{}", cmDto);
             this.commentMsgService.saveCommmentMsg(cmDto);
-            this.msgRoomService.noReadMsgAdd(cmDto.getReceiverId(), 1, MsgRoomType.COMMENT_ROOM, MsgRoomType.TOTAL_MSG_ROOM);
+
             CommentMsgVo msgVo = this.commentMsgService.getCommentMsgVo(cmDto.getCommentId());
             this.webSocketService.sendMsg(cmDto.getReceiverId(), msgVo, WsMsgType.COMMENT_MSG);
         }

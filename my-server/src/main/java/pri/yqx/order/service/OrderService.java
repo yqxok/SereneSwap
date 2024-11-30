@@ -18,4 +18,6 @@ public interface OrderService {
     Long saveOrder(Long userId, OrderReq orderReq);
 
     OrderUnion getOrder(Long userId, Long orderId);
+
+    void deleteOrder(Long aLong, Long orderId);
 }

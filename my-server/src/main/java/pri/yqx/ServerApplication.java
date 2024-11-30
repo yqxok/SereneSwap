@@ -7,11 +7,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 @EnableCaching
-public class ControllerApplication {
-    public ControllerApplication() {
+public class ServerApplication {
+    public ServerApplication() {
     }
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(ControllerApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(ServerApplication.class, args);
     }
 }

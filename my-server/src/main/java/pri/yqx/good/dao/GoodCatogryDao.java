@@ -27,8 +27,7 @@ public class GoodCatogryDao extends ServiceImpl<GoodCategoryMapper, GoodCategory
     @Resource
     private CategoryMapper categoryMapper;
 
-    public GoodCatogryDao() {
-    }
+
 
     public CursorPageVo<GoodCategory> getCursorPage(Long cursor, Integer pageSize, String categoryName) {
         return CursorUtil.init(this, pageSize, (wrapper) -> {

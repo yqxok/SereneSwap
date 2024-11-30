@@ -93,6 +93,7 @@ public class GoodServiceImpl extends ServiceImpl<GoodMapper, Good> implements Go
         AssertUtil.isZero(count, "该商品id无效");
         this.goodCatogryDao.logicRemoveByGoodId(goodId);
         this.goodDao.logicRemove(goodId);
+        this.goodCache.rmCache(goodId);
     }
 
     public GoodDetailVo getGoodDetailVo(Long goodId) {
@@ -114,6 +115,8 @@ public class GoodServiceImpl extends ServiceImpl<GoodMapper, Good> implements Go
         }
 
         this.goodDao.updateById(MyBeanUtils.copyProperties(goodDto, new Good()));
+        //删除缓存
+        this.goodCache.rmCache(goodDto.getGoodId());
         return goodDto.getGoodId();
     }
 

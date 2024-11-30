@@ -19,13 +19,23 @@ public class ContactController {
     private ContactService contactService;
 
 
-
+    /**
+     * 获取会话列表
+     * @param cursor
+     * @param pageSize
+     * @return
+     */
     @GetMapping({"/{cursor}/{pageSize}"})
     public Result<CursorPageVo<ContactVo>> getChatRooms(@PathVariable Long cursor, @PathVariable Integer pageSize) {
         CursorPageVo<ContactVo> cursorPage = this.contactService.getCursorContact(ThreadHolder.get(), cursor, pageSize);
         return Result.success(cursorPage, "会话列表查询成功");
     }
 
+    /**
+     * 删除会话
+     * @param contactId
+     * @return
+     */
     @DeleteMapping({"/{contactId}"})
     public Result<String> removeContact(@PathVariable Long contactId) {
         this.contactService.deleteContact(ThreadHolder.get(), contactId);

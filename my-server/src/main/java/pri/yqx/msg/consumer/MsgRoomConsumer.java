@@ -23,18 +23,17 @@ public class MsgRoomConsumer implements RocketMQListener<UserSigninDto> {
     @Resource
     private MsgRoomDao msgRoomDao;
 
-    public MsgRoomConsumer() {
-    }
 
     @Transactional
     public void onMessage(UserSigninDto dto) {
         try {
             MsgRoom msgRoom = (new MsgRoom()).setUserId(dto.getUserId()).setType(MsgRoomType.COMMENT_ROOM.getType()).setNoReadNum(0);
             MsgRoom msgRoom1 = (new MsgRoom()).setUserId(dto.getUserId()).setType(MsgRoomType.ORDER_ROOM.getType()).setNoReadNum(0);
-            this.msgRoomDao.saveBatch(Arrays.asList(msgRoom, msgRoom1));
-        } catch (Exception var4) {
-            log.warn("消费出现异常,{}", dto, var4);
-            throw new RuntimeException(var4);
+            MsgRoom msgRoom2 = new MsgRoom().setUserId(dto.getUserId()).setType(MsgRoomType.TOTAL_MSG_ROOM.getType()).setNoReadNum(0);
+            this.msgRoomDao.saveBatch(Arrays.asList(msgRoom, msgRoom1,msgRoom2));
+        } catch (Exception exp) {
+            log.warn("消费出现异常,{}", dto, exp);
+            throw new RuntimeException(exp);
         }
     }
 }

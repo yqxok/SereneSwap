@@ -82,7 +82,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         Good good = this.goodCache.getCache(cDto.getGoodId());
         AssertUtil.isEmpty(good, "goodId无效");
         long id = IdWorker.getId();
-        this.commentDao.save((new Comment()).setCommentId(id).setGoodId(cDto.getGoodId()).setUserId(userId).setContent(cDto.getContent()));
+        this.commentDao.save(new Comment().setCommentId(id).setGoodId(cDto.getGoodId()).setUserId(userId).setContent(cDto.getContent()));
         this.applicationContext.publishEvent(new CommentEvent(this, id, 0));
         return id;
     }

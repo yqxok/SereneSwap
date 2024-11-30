@@ -39,8 +39,9 @@ public class CommentEventListner {
     @TransactionalEventListener({CommentEvent.class})
     public void sendCommentMsg(CommentEvent commentEvent) {
         CommentMsgDto cmDto = new CommentMsgDto().setCommentId(commentEvent.getCommentId()).setType(commentEvent.getType());
+        //判断评论类型
         if (Objects.equals(cmDto.getType(), CommentMsgType.FATHER_COMMENT.getType())) {
-            Comment comment = (Comment)this.commentDao.getById(cmDto.getCommentId());
+            Comment comment = this.commentDao.getById(cmDto.getCommentId());
             Good good = this.goodCache.getCache(comment.getGoodId());
             if (Objects.equals(comment.getUserId(), good.getUserId())) {
                 return;

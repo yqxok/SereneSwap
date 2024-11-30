@@ -43,10 +43,10 @@ public class ContactServiceImpl implements ContactService {
     @Resource
     private ChatContentDao chatContentDao;
 
-    public ContactServiceImpl() {
-    }
+
 
     @Transactional
+    @Override
     public void createContact(ChatContentReq cReq) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime earlistTime = LocalDateTime.parse("2000-01-01 00:00:00", formatter);
@@ -58,18 +58,19 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Transactional
+    @Override
     public CursorPageVo<ContactVo> getCursorContact(Long userId, Long cursor, Integer pageSize) {
         CursorPageVo<Contact> cursorPage = this.contactDao.getCursorPage(userId, cursor, pageSize);
         Map<Long, User> userMap = this.userCache.getAllCache(MyBeanUtils.getPropertySet(cursorPage.getList(), Contact::getOtherId));
         Map<Long, Good> goodMap = this.goodCache.getAllCache(MyBeanUtils.getPropertySet(cursorPage.getList(), Contact::getGoodId));
         return ContactAdapter.buildContactVoCursorPage(cursorPage, userMap, goodMap);
     }
-
+    @Override
     public void deleteContact(Long userId, Long contactId) {
         Contact contact = this.contactDao.getContactById(userId, contactId);
         AssertUtil.isEmpty(contact, "contactId无效");
         LocalDateTime latestMsgTime = this.chatContentDao.getLatestMsgTime(contact.getGoodId() + contact.getUserId() + contact.getOtherId());
-        Contact contact1 = (new Contact()).setContactId(contact.getContactId()).setIsDeleted(true).setEarlistTime(latestMsgTime).setNoReadNum(0);
+        Contact contact1 = new Contact().setContactId(contact.getContactId()).setIsDeleted(true).setEarlistTime(latestMsgTime);
         this.contactDao.updateById(contact1);
     }
 }

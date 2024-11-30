@@ -41,14 +41,10 @@ import pri.yqx.user.service.UserService;
 @Service
 @Transactional
 public class ChatContentServiceImpl extends ServiceImpl<ChatContentMapper, ChatContent> implements ChatContentService {
-    @Resource
-    private ChatContentMapper chatContentMapper;
-    @Resource
-    private UserService userService;
+
     @Resource
     private ChatContentDao chatContentDao;
-//    @Resource
-//    private RoomDao roomDao;
+
     @Resource
     private ContactService contactService;
     @Resource
@@ -60,8 +56,7 @@ public class ChatContentServiceImpl extends ServiceImpl<ChatContentMapper, ChatC
     @Resource
     private MsgRoomService msgRoomService;
 
-    public ChatContentServiceImpl() {
-    }
+
 
     public void updateContentRead(Long userId, Long goodId, Long otherId) {
         Contact contact = this.contactDao.getContact(userId, userId + goodId + otherId);
@@ -98,7 +93,6 @@ public class ChatContentServiceImpl extends ServiceImpl<ChatContentMapper, ChatC
                 if (Objects.equals(i.getUserId(), cDto.getReceiveUserId())) {
                     contact.setNoReadNum(i.getNoReadNum() + 1);
                 }
-
                 return contact;
             }).collect(Collectors.toList());
             this.contactDao.updateBatchById(collect);
