@@ -104,7 +104,7 @@ public class ChatContentServiceImpl extends ServiceImpl<ChatContentMapper, ChatC
     }
 
     public ChatContentVo getChatContent(Long id) {
-        ChatContent chatContent = (ChatContent)this.chatContentDao.getById(id);
-        return (ChatContentVo)MyBeanUtils.copyProperties(chatContent, new ChatContentVo());
+        ChatContent chatContent = this.chatContentDao.getById(id);
+        return MyBeanUtils.copyProperties(chatContent, new ChatContentVo());
     }
 }

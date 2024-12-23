@@ -11,11 +11,11 @@ public class MqProducer {
     @Resource
     private RocketMQTemplate rocketMQTemplate;
 
-    public MqProducer() {
-    }
+
 
     public void sendMsg(String topic, Object data) {
         Message<Object> message = MessageBuilder.withPayload(data).build();
-        this.rocketMQTemplate.send(topic, message);
+
+        this.rocketMQTemplate.syncSend(topic, message);
     }
 }

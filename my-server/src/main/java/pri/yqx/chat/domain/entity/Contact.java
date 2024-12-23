@@ -18,17 +18,12 @@ public class Contact {
     private Long userId;
     private Long otherId;
     private Integer noReadNum;
-    @TableField(
-        fill = FieldFill.INSERT
-    )
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
-    @TableField(
-        fill = FieldFill.INSERT_UPDATE
-    )
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-    @TableField(
-        fill = FieldFill.INSERT_UPDATE
-    )
+    //更新时间,用于作为游标
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long upTimeStamp;
     private LocalDateTime earlistTime;
     private Long goodId;

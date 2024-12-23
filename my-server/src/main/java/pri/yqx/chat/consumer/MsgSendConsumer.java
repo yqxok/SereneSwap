@@ -24,11 +24,10 @@ public class MsgSendConsumer implements RocketMQListener<ChatMsgDto> {
     private ChatContentDao chatContentDao;
 
 
-
     public void onMessage(ChatMsgDto chatMsgDto) {
         log.warn("我收到消息了={}", chatMsgDto);
-        ChatContent chatContent = (ChatContent)this.chatContentDao.getById(chatMsgDto.getChatId());
-        ChatMsgVo chatMsgVo = (ChatMsgVo)MyBeanUtils.copyProperties(chatContent, new ChatMsgVo());
+        ChatContent chatContent = this.chatContentDao.getById(chatMsgDto.getChatId());
+        ChatMsgVo chatMsgVo = MyBeanUtils.copyProperties(chatContent, new ChatMsgVo());
         this.webSocketService.sendMsg(chatMsgVo.getReceiveUserId(), chatMsgVo, WsMsgType.CHAT_MSG);
     }
 }

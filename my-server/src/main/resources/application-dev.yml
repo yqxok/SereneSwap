@@ -2,35 +2,7 @@ storage:
   tmp-file: D:\\img\\tmp\\tmp.jpg
   tmp-file1: D:\\img\\tmp\\tmp1.jpg
 
-#spring:
-#  redis:
-#    host: 110.41.32.97
-#    port: 6379
-#    password: 1932829174a
-#    database: 0
-#    # 解决redis 240秒超时问题
-#    lettuce:
-#      pool:
-#        max-active: 8
-#        min-idle: 2
-#        max-idle: 3
-#        max-wait: -1
-#      shutdown-timeout: 100
-#    timeout: 5000
-#  datasource:
-#    hikari:
-#      max-lifetime: 60000
-#    username: yqx
-#    url: jdbc:mysql://110.41.32.97:3306/weiapp
-#    password: 1932829174a
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#mybatis-plus:
-#  configuration:
-#    map-underscore-to-camel-case: true
-#  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#  global-config:
-#    db-config:
-#      table-prefix: wx_
+
 
 
 

@@ -1,3 +1,6 @@
 storage:
   tmp-file: /tmp/tmp.jpg
   tmp-file1: /tmp/tmp1.jpg
+logging:
+  file:
+    path: /home/docker/my-server/msg.log
