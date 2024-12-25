@@ -7,6 +7,8 @@ package pri.yqx.good.controller;
 
 import java.util.List;
 import javax.annotation.Resource;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.annotation.Validated;
@@ -26,6 +28,8 @@ import pri.yqx.common.groups.Insert;
 import pri.yqx.common.groups.Update;
 import pri.yqx.good.domain.dto.GoodCursorReq;
 import pri.yqx.good.domain.dto.GoodReq;
+import pri.yqx.good.domain.dto.SelfGoodReq;
+import pri.yqx.good.domain.vo.GoodCursorPageVo;
 import pri.yqx.good.domain.vo.GoodDetailVo;
 import pri.yqx.good.domain.vo.GoodVo;
 import pri.yqx.good.service.GoodService;
@@ -44,9 +48,14 @@ public class GoodController {
         return Result.success(goodId, "商品保存成功");
     }
 
+    /**
+     * 未登录状态获取商品分页请求
+     * @param goodCursorReq
+     * @return
+     */
     @PostMapping({"/no/page"})
-    public Result<CursorPageVo<GoodVo>> getGoodPage(@RequestBody GoodCursorReq goodCursorReq) {
-        CursorPageVo<GoodVo> goodVoCursorPageVo = this.goodService.pageGoodVo(goodCursorReq);
+    public Result<GoodCursorPageVo> getGoodPage(@Valid @RequestBody GoodCursorReq goodCursorReq) {
+        GoodCursorPageVo goodVoCursorPageVo = this.goodService.pageGoodVo(goodCursorReq);
         return Result.success(goodVoCursorPageVo, "查询成功");
     }
 
@@ -56,9 +65,9 @@ public class GoodController {
         return Result.success(goodDetailVo, "商品信息查询成功");
     }
 
-    @GetMapping({"/no/list/{userId}"})
-    public Result<List<GoodVo>> getGoodListById(@PathVariable Long userId, @RequestParam(required = false) Short status) {
-        List<GoodVo> goodVos = this.goodService.listGoodVoById(userId, status);
+    @PostMapping({"/no/list/{userId}"})
+    public Result<GoodCursorPageVo> getGoodListById(@PathVariable Long userId,@RequestBody SelfGoodReq selfGoodReq) {
+        GoodCursorPageVo goodVos = this.goodService.listGoodVoById(userId, selfGoodReq);
         return Result.success(goodVos, "用户商品查询成功");
     }
 

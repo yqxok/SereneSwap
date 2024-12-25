@@ -26,9 +26,11 @@ import pri.yqx.good.dao.GoodCatogryDao;
 import pri.yqx.good.dao.GoodDao;
 import pri.yqx.good.domain.dto.GoodCursorReq;
 import pri.yqx.good.domain.dto.GoodReq;
+import pri.yqx.good.domain.dto.SelfGoodReq;
 import pri.yqx.good.domain.entity.Category;
 import pri.yqx.good.domain.entity.Good;
 import pri.yqx.good.domain.entity.GoodCategory;
+import pri.yqx.good.domain.vo.GoodCursorPageVo;
 import pri.yqx.good.domain.vo.GoodDetailVo;
 import pri.yqx.good.domain.vo.GoodVo;
 import pri.yqx.good.mapper.GoodMapper;
@@ -67,7 +69,7 @@ public class GoodServiceImpl extends ServiceImpl<GoodMapper, Good> implements Go
         return goodId;
     }
 
-    public CursorPageVo<GoodVo> pageGoodVo(GoodCursorReq goodCursorReq) {
+    public GoodCursorPageVo pageGoodVo(GoodCursorReq goodCursorReq) {
         CursorPageVo<Good> cursorPage = null;
         if (Objects.isNull(goodCursorReq.getCategoryName())) {
             cursorPage = this.goodDao.getCursorPage(goodCursorReq.getCursor(), goodCursorReq.getPageSize());
@@ -78,14 +80,14 @@ public class GoodServiceImpl extends ServiceImpl<GoodMapper, Good> implements Go
 
         Set<Long> userIds = MyBeanUtils.getPropertySet(cursorPage.getList(), Good::getUserId);
         Map<Long, User> users = this.userCache.getAllCache(userIds);
-        return GoodAdapter.buildGoodVoCursorPage(cursorPage, users);
+        return GoodAdapter.buildGoodVoCursorPage(cursorPage, users,goodCursorReq);
     }
-
-    public List<GoodVo> listGoodVoById(Long userId, Short status) {
+    @Override
+    public GoodCursorPageVo listGoodVoById(Long userId, SelfGoodReq selfGoodReq) {
         User user = this.userCache.getCache(userId);
         AssertUtil.isEmpty(user, "userId无效");
-        List<Good> goods = this.goodDao.getGoodsByUserId(userId, status);
-        return GoodAdapter.buildGoodVoList(goods, user);
+        List<Good> goods = this.goodDao.getGoodsByUserId(userId, selfGoodReq.getStatus());
+        return GoodAdapter.buildGoodVoList(goods, user,selfGoodReq);
     }
 
     public void deleteGoodById(Long goodId, Long userId) {

@@ -19,9 +19,12 @@ public class OrderController {
     @Resource
     private OrderService orderService;
 
-    public OrderController() {
-    }
 
+    /**
+     * 分页
+     * @param cursorDto
+     * @return
+     */
     @PostMapping({"/page"})
     public Result<CursorPageVo<OrderVo>> getCursorPage(@Validated @RequestBody OrderCursorReq cursorDto) {
         CursorPageVo<OrderVo> cursorPageVo = this.orderService.getCursorPage(ThreadHolder.get(), cursorDto);
@@ -48,6 +51,7 @@ public class OrderController {
     @PostMapping
     public Result<Long> saveOrder(@Validated @RequestBody OrderReq orderReq) {
         Long orderId = this.orderService.saveOrder(ThreadHolder.get(), orderReq);
+
         return Result.success(orderId, "下单成功");
     }
 
