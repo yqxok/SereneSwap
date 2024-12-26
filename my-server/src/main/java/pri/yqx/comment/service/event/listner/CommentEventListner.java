@@ -46,15 +46,14 @@ public class CommentEventListner {
             if (Objects.equals(comment.getUserId(), good.getUserId())) {
                 return;
             }
-
             cmDto.setSenderId(comment.getUserId()).setReceiverId(good.getUserId()).setGoodId(comment.getGoodId()).setContent(comment.getContent());
         } else {
             CommentSon commentSon = this.sonCommentDao.getById(cmDto.getCommentId());
             Comment comment = this.commentDao.getById(commentSon.getCommentId());
-            if (Objects.equals(comment.getUserId(), comment.getReplyId())) {
+            //如果是自己回复自己,则不发送消息
+            if (Objects.equals(commentSon.getUserId(), commentSon.getReplyId())) {
                 return;
             }
-
             cmDto.setSenderId(commentSon.getUserId()).setReceiverId(commentSon.getReplyId()).setGoodId(comment.getGoodId()).setContent(commentSon.getContent());
         }
 
