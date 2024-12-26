@@ -6,9 +6,10 @@
 package pri.yqx.good.controller;
 
 import java.util.List;
-import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,9 +32,9 @@ import pri.yqx.good.service.GoodCategoryService;
 @Validated
 public class CategoryController {
     private static final Logger log = LoggerFactory.getLogger(CategoryController.class);
-    @Resource
+    @Autowired
     private CategoryService categoryService;
-    @Resource
+    @Autowired
     private GoodCategoryService goodCategoryService;
 
     public CategoryController() {

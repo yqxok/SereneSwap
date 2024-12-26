@@ -11,7 +11,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -24,9 +26,9 @@ import pri.yqx.good.domain.enums.GoodStatusEnums;
 
 @Component
 public class GoodCache extends AbstractMutiCache<Good> implements RedisCache<Good> {
-    @Resource
+    @Autowired
     private GoodDao goodDao;
-    @Resource
+    @Autowired
     private GoodCatogryDao goodCatogryDao;
 
     public GoodCache() {

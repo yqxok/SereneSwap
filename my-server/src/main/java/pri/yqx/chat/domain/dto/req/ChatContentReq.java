@@ -5,12 +5,13 @@
 
 package pri.yqx.chat.domain.dto.req;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import pri.yqx.common.groups.Insert;
 import pri.yqx.common.groups.Update;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 
 @Data
 public class ChatContentReq {

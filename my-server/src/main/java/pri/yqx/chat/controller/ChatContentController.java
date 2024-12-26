@@ -1,6 +1,7 @@
 package pri.yqx.chat.controller;
 
-import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,9 +21,9 @@ import pri.yqx.sensitive.SensitiveWordConverter;
 @RestController
 @RequestMapping({"/chatContent"})
 public class ChatContentController {
-    @Resource
+    @Autowired
     private ChatContentService chatContentService;
-    @Resource
+    @Autowired
     private SensitiveWordConverter sensitiveWordConverter;
     /**
      * 聊天消息已读

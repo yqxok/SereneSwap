@@ -3,7 +3,8 @@ package pri.yqx.chat.dao;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
-import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pri.yqx.chat.domain.entity.Contact;
 import pri.yqx.chat.mapper.ContactMapper;
@@ -12,7 +13,7 @@ import pri.yqx.common.util.CursorUtil;
 
 @Component
 public class ContactDao extends ServiceImpl<ContactMapper, Contact> {
-    @Resource
+    @Autowired
     private ContactMapper contactMapper;
 
 

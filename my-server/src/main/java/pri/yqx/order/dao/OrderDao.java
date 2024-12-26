@@ -4,8 +4,9 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pri.yqx.common.domain.response.CursorPageVo;
 import pri.yqx.common.util.CursorUtil;
@@ -17,7 +18,7 @@ import pri.yqx.order.mapper.OrderMapper;
 
 @Component
 public class OrderDao extends ServiceImpl<OrderMapper, Order> {
-    @Resource
+    @Autowired
     private OrderMapper orderMapper;
 
     public OrderDao() {

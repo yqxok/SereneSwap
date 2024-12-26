@@ -5,7 +5,8 @@
 
 package pri.yqx.comment.controller;
 
-import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ import pri.yqx.common.domain.response.Result;
 @RestController
 @RequestMapping({"/goodJob"})
 public class GoodJobController {
-    @Resource
+    @Autowired
     private GoodJobService goodJobService;
 
     public GoodJobController() {

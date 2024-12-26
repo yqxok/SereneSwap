@@ -5,8 +5,9 @@
 
 package pri.yqx.good.domain.dto;
 
-import javax.validation.constraints.NotEmpty;
 
+
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import pri.yqx.common.groups.Insert;
 @Data

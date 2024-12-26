@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Function;
-import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pri.yqx.common.domain.request.CursorReq;
@@ -37,17 +37,16 @@ import pri.yqx.user.service.cache.UserCache;
 @Transactional
 public class OrderMsgServiceImpl extends ServiceImpl<OrderMsgMapper, OrderMsg> implements OrderMsgService {
     private static final Logger log = LoggerFactory.getLogger(OrderMsgServiceImpl.class);
-    @Resource
+    @Autowired
     private OrderMsgDao orderMsgDao;
-    @Resource
+    @Autowired
     private UserCache userCache;
-    @Resource
+    @Autowired
     private GoodCache goodCache;
-    @Resource
+    @Autowired
     private MsgRoomDao msgRoomDao;
 
-    public OrderMsgServiceImpl() {
-    }
+
 
     public CursorPageVo<OrderMsgVo> getCursorPage(Long userId, CursorReq cursorReq) {
         CursorPageVo<OrderMsg> cursorPage = this.orderMsgDao.getCursorPage(userId, cursorReq.getCursor(), cursorReq.getPageSize());

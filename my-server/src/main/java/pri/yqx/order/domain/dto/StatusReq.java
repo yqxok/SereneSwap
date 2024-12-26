@@ -5,8 +5,9 @@
 
 package pri.yqx.order.domain.dto;
 
-import javax.validation.constraints.NotNull;
 
+
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 @Data

@@ -11,11 +11,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.annotation.Resource;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pri.yqx.common.domain.request.CursorReq;
@@ -44,16 +44,16 @@ import pri.yqx.user.service.cache.UserCache;
 public class CollectServiceImpl  implements CollectService {
 
 
-    @Resource
+    @Autowired
     private GoodService goodService;
 
-    @Resource
+    @Autowired
     private CollectDao collectDao;
-    @Resource
+    @Autowired
     private GoodCache goodCache;
-    @Resource
+    @Autowired
     private UserCache userCache;
-    @Resource
+    @Autowired
     private GoodDao goodDao;
 
 

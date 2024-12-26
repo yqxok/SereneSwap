@@ -12,7 +12,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pri.yqx.common.util.AssertUtil;
@@ -27,9 +29,9 @@ import pri.yqx.good.service.CategoryService;
 @Service
 @Transactional
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
-    @Resource
+    @Autowired
     private CategoryDao categoryDao;
-    @Resource
+    @Autowired
     private GoodCatogryDao goodCatogryDao;
 
 

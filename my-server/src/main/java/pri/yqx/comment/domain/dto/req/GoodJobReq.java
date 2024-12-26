@@ -5,9 +5,9 @@
 
 package pri.yqx.comment.domain.dto.req;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
 @Data
 public class GoodJobReq {
     private @NotNull Long gjId;

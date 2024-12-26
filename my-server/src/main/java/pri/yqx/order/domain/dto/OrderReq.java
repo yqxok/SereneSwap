@@ -5,10 +5,10 @@
 
 package pri.yqx.order.domain.dto;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 @Data
 public class OrderReq {
     private @NotNull Long goodId;

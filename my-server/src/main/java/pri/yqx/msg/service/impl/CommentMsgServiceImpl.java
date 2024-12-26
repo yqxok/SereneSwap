@@ -11,7 +11,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pri.yqx.common.domain.request.CursorReq;
@@ -37,15 +39,15 @@ import pri.yqx.user.service.cache.UserCache;
 @Service
 @Transactional
 public class CommentMsgServiceImpl extends ServiceImpl<CommentMsgMapper, CommentMsg> implements CommentMsgService {
-    @Resource
+    @Autowired
     private CommentMsgDao commentMsgDao;
-    @Resource
+    @Autowired
     private GoodCache goodCache;
-    @Resource
+    @Autowired
     private UserCache userCache;
-    @Resource
+    @Autowired
     private MsgRoomDao msgRoomDao;
-    @Resource
+    @Autowired
     private MsgRoomService msgRoomService;
 
 

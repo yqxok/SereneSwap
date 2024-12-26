@@ -7,7 +7,8 @@ package pri.yqx.comment.dao;
 
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pri.yqx.comment.domain.entity.Comment;
 import pri.yqx.comment.mapper.CommentMapper;
@@ -16,7 +17,7 @@ import pri.yqx.common.util.CursorUtil;
 
 @Repository
 public class CommentDao extends ServiceImpl<CommentMapper, Comment> {
-    @Resource
+    @Autowired
     private CommentMapper commentMapper;
 
     public CommentDao() {

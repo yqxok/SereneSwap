@@ -6,7 +6,9 @@
 package pri.yqx.user.controller;
 
 import java.util.List;
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +32,9 @@ import pri.yqx.user.service.DormitoryService;
 @RequestMapping({"/address"})
 @RestController
 public class AddressController {
-    @Resource
+    @Autowired
     private AddressService addressService;
-    @Resource
+    @Autowired
     private DormitoryService dormitoryService;
 
 

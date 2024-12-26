@@ -5,7 +5,9 @@
 
 package pri.yqx.comment.controller;
 
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,9 +30,9 @@ import pri.yqx.sensitive.SensitiveWordConverter;
 @RestController
 @RequestMapping({"/comment"})
 public class CommentController {
-    @Resource
+    @Autowired
     private CommentService commentService;
-    @Resource
+    @Autowired
     private SensitiveWordConverter sensitiveWordConverter;
     /**
      * 发布评论

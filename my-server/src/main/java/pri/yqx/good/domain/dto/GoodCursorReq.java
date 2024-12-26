@@ -1,12 +1,12 @@
 package pri.yqx.good.domain.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import pri.yqx.common.domain.request.CursorReq;
 import pri.yqx.good.domain.enums.GoodStatusEnums;
 
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter

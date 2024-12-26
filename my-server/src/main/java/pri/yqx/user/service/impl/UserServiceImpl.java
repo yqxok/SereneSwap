@@ -8,9 +8,10 @@ package pri.yqx.user.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pri.yqx.common.exception.BusinessException;
@@ -32,11 +33,11 @@ import pri.yqx.user.service.cache.UserCache;
 @Transactional
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
-    @Resource
+    @Autowired
     private UserDao userDao;
-    @Resource
+    @Autowired
     private UserCache userCache;
-    @Resource
+    @Autowired
     private MsgRoomService msgRoomService;
 
 

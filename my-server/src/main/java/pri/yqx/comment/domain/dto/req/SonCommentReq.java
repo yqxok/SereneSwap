@@ -5,10 +5,11 @@
 
 package pri.yqx.comment.domain.dto.req;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 @Data
 public class SonCommentReq {
     private @NotEmpty String content;

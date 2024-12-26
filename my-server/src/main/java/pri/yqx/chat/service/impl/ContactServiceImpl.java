@@ -10,7 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pri.yqx.chat.dao.ChatContentDao;
@@ -32,15 +34,15 @@ import pri.yqx.user.service.cache.UserCache;
 @Service
 public class ContactServiceImpl implements ContactService {
     private static final String DEFAULT_READ_TIME = "2000-01-01 00:00:00";
-    @Resource
+    @Autowired
     private ContactDao contactDao;
 //    @Resource
 //    private RoomDao roomDao;
-    @Resource
+    @Autowired
     private UserCache userCache;
-    @Resource
+    @Autowired
     private GoodCache goodCache;
-    @Resource
+    @Autowired
     private ChatContentDao chatContentDao;
 
 

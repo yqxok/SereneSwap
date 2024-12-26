@@ -10,7 +10,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pri.yqx.msg.dao.MsgRoomDao;
@@ -22,11 +24,10 @@ import pri.yqx.msg.service.MsgRoomService;
 @Service
 @Transactional
 public class MsgRoomServiceImpl implements MsgRoomService {
-    @Resource
+    @Autowired
     private MsgRoomDao msgRoomDao;
 
-    public MsgRoomServiceImpl() {
-    }
+
 
     public void createMsgRoom(Long userId) {
         MsgRoom msgRoom = (new MsgRoom()).setUserId(userId).setType(MsgRoomType.COMMENT_ROOM.getType()).setNoReadNum(0);

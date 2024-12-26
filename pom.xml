@@ -10,18 +10,19 @@
     <modules>
         <module>my-server</module>
         <module>sensitive-grep</module>
+        <module>spring-ai</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
-        <version>2.7.18</version>
+        <version>3.2.0</version>
         <artifactId>spring-boot-starter-parent</artifactId>
     </parent>
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <jjwt.version>0.9.1</jjwt.version>
         <qiniu-java-sdk.version>7.13.0</qiniu-java-sdk.version>
-        <mybatis.plus.version>3.5.3.1</mybatis.plus.version>
+        <mybatis.plus.version>3.5.5</mybatis.plus.version>
         <mysql.version>8.0.33</mysql.version>
         <rocketmq.version>2.2.0</rocketmq.version>
         <fastjson2.version>2.0.0</fastjson2.version>
@@ -46,7 +47,7 @@
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis.plus.version}</version>
             </dependency>
             <dependency>
@@ -80,7 +81,6 @@
                 <version>${java-jwt.version}</version>
             </dependency>
         </dependencies>
-
     </dependencyManagement>
 
 </project>

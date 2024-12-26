@@ -8,10 +8,11 @@ package pri.yqx.good.controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javax.annotation.Resource;
+
 import javax.imageio.ImageIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ import pri.yqx.good.domain.json.PicUrl;
 @RequestMapping({"/upload"})
 public class UploadController {
     private static final Logger log = LoggerFactory.getLogger(UploadController.class);
-    @Resource
+    @Autowired
     private QiniuOss qiniuOss;
     @Value("${oss.tmp-file}")
     private String tmpFile;

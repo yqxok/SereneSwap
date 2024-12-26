@@ -1,6 +1,8 @@
 package pri.yqx.msg.controller;
 
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,7 +19,7 @@ import pri.yqx.msg.service.MsgRoomService;
 @RequestMapping({"/msgRoom"})
 @Validated
 public class MsgRoomController {
-    @Resource
+    @Autowired
     private MsgRoomService msgRoomService;
 
 

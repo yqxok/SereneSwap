@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pri.yqx.user.dao.DormitoryDao;
@@ -15,7 +17,7 @@ import pri.yqx.user.service.DormitoryService;
 @Service
 @Transactional
 public class DormitoryServiceImpl implements DormitoryService {
-    @Resource
+    @Autowired
     private DormitoryDao dormitoryDao;
 
     public DormitoryServiceImpl() {

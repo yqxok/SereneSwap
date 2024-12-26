@@ -5,8 +5,9 @@
 
 package pri.yqx.user.domain.dto;
 
-import javax.validation.constraints.NotEmpty;
 
+
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import pri.yqx.common.groups.Isphone;

@@ -15,7 +15,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,21 +52,21 @@ import pri.yqx.user.service.cache.UserCache;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-    @Resource
+    @Autowired
     private OrderInfoDao orderInfoDao;
-    @Resource
+    @Autowired
     private OrderDao orderDao;
-    @Resource
+    @Autowired
     private UserCache userCache;
-    @Resource
+    @Autowired
     private GoodCache goodCache;
-    @Resource
+    @Autowired
     private DormitoryDao dormitoryDao;
-    @Resource
+    @Autowired
     private AddressDao addressDao;
-    @Resource
+    @Autowired
     private GoodService goodService;
-    @Resource
+    @Autowired
     private ApplicationContext applicationContext;
 
     public OrderServiceImpl() {

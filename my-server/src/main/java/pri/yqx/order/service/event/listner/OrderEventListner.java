@@ -1,6 +1,8 @@
 package pri.yqx.order.service.event.listner;
 
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -10,7 +12,7 @@ import pri.yqx.rocketmq.produce.MqProducer;
 
 @Component
 public class OrderEventListner {
-    @Resource
+    @Autowired
     private MqProducer mqProducer;
 
     public OrderEventListner() {

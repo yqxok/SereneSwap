@@ -11,20 +11,21 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
-  redis:
-    host: 110.41.32.97
-    port: 6379
-    password: 1932829174a
-    database: 0
-    # 解决redis 240秒超时问题
-    lettuce:
-      pool:
-        max-active: 8
-        min-idle: 2
-        max-idle: 3
-        max-wait: -1
-      shutdown-timeout: 100
-    timeout: 5000
+  data:
+    redis:
+      host: 110.41.32.97
+      port: 6379
+      password: 1932829174a
+      database: 0
+      # 解决redis 240秒超时问题
+      lettuce:
+        pool:
+          max-active: 8
+          min-idle: 2
+          max-idle: 3
+          max-wait: -1
+        shutdown-timeout: 100
+      timeout: 5000
   datasource:
     hikari:
       max-lifetime: 60000

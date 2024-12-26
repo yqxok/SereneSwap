@@ -1,6 +1,8 @@
 package pri.yqx.chat.controller;
 
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +17,7 @@ import pri.yqx.common.domain.response.Result;
 @RestController
 @RequestMapping({"/contact"})
 public class ContactController {
-    @Resource
+    @Autowired
     private ContactService contactService;
 
 

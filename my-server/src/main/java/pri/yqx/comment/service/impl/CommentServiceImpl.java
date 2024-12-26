@@ -14,7 +14,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -49,17 +51,17 @@ import pri.yqx.user.service.cache.UserCache;
 @Lazy
 @Transactional
 public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements CommentService {
-    @Resource
+    @Autowired
     private CommentDao commentDao;
-    @Resource
+    @Autowired
     private GoodJobDao goodJobDao;
-    @Resource
+    @Autowired
     private UserCache userCache;
-    @Resource
+    @Autowired
     private SonCommentDao sonCommentDao;
-    @Resource
+    @Autowired
     private GoodCache goodCache;
-    @Resource
+    @Autowired
     private ApplicationContext applicationContext;
     private static final int SON_COMMENT_INIT_SIZE = 1;
 

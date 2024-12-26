@@ -5,13 +5,14 @@
 
 package pri.yqx.msg.consumer;
 
-import javax.annotation.Resource;
+
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pri.yqx.msg.dao.CommentMsgDao;
 import pri.yqx.msg.domain.dto.CommentMsgDto;
@@ -30,13 +31,13 @@ import pri.yqx.websocket.service.WsMsgType;
 @Slf4j
 public class CommentConsumer implements RocketMQListener<CommentMsgDto> {
 
-    @Resource
+    @Autowired
     private CommentMsgDao commentMsgDao;
-    @Resource
+    @Autowired
     private CommentMsgService commentMsgService;
-    @Resource
+    @Autowired
     private WebSocketService webSocketService;
-    @Resource
+    @Autowired
     private MsgRoomService msgRoomService;
 
 

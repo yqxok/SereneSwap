@@ -4,7 +4,8 @@ import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapp
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pri.yqx.comment.domain.entity.CommentSon;
 import pri.yqx.comment.domain.vo.CmCursorPageVo;
@@ -15,7 +16,7 @@ import pri.yqx.common.util.CursorUtil;
 
 @Component
 public class SonCommentDao extends ServiceImpl<SonCommentMapper, CommentSon> {
-    @Resource
+    @Autowired
     private SonCommentMapper sonCommentMapper;
 
     public SonCommentDao() {

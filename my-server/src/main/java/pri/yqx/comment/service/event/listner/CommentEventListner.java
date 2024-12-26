@@ -6,7 +6,8 @@
 package pri.yqx.comment.service.event.listner;
 
 import java.util.Objects;
-import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -23,13 +24,13 @@ import pri.yqx.rocketmq.produce.MqProducer;
 
 @Component
 public class CommentEventListner {
-    @Resource
+    @Autowired
     private MqProducer mqProducer;
-    @Resource
+    @Autowired
     private CommentDao commentDao;
-    @Resource
+    @Autowired
     private GoodCache goodCache;
-    @Resource
+    @Autowired
     private SonCommentDao sonCommentDao;
 
     public CommentEventListner() {

@@ -1,7 +1,9 @@
 package pri.yqx.comment.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import javax.annotation.Resource;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pri.yqx.comment.dao.GoodJobDao;
@@ -14,9 +16,9 @@ import pri.yqx.common.util.AssertUtil;
 
 @Service
 public class GoodJobServiceImpl extends ServiceImpl<GoodJobMapper, GoodJob> implements GoodJobService {
-    @Resource
+    @Autowired
     private GoodJobDao goodJobDao;
-    @Resource
+    @Autowired
     private CommentService commentService;
 
     public GoodJobServiceImpl() {

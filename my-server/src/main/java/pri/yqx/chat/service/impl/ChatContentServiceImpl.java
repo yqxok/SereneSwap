@@ -11,7 +11,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,18 +43,18 @@ import pri.yqx.user.service.UserService;
 @Transactional
 public class ChatContentServiceImpl extends ServiceImpl<ChatContentMapper, ChatContent> implements ChatContentService {
 
-    @Resource
+    @Autowired
     private ChatContentDao chatContentDao;
 
-    @Resource
+    @Autowired
     private ContactService contactService;
-    @Resource
+    @Autowired
     private ApplicationContext applicationContext;
-    @Resource
+    @Autowired
     private GoodCache goodCache;
-    @Resource
+    @Autowired
     private ContactDao contactDao;
-    @Resource
+    @Autowired
     private MsgRoomService msgRoomService;
 
 

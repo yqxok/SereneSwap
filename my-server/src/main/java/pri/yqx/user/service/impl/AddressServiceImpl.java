@@ -12,9 +12,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pri.yqx.common.domain.response.CursorPageVo;
@@ -37,15 +38,15 @@ import pri.yqx.user.service.adapter.AddressAdapter;
 @Transactional
 public class AddressServiceImpl  implements AddressService {
     private static final Logger log = LoggerFactory.getLogger(AddressServiceImpl.class);
-    @Resource
+    @Autowired
     private AddressMapper addressMapper;
-    @Resource
+    @Autowired
     private DormitoryService dormitoryService;
-    @Resource
+    @Autowired
     private UserService userService;
-    @Resource
+    @Autowired
     private AddressDao addressDao;
-    @Resource
+    @Autowired
     private DormitoryDao dormitoryDao;
 
     @Override

@@ -1,14 +1,14 @@
 package pri.yqx.chat.domain.dto.req;
 
-import javax.validation.constraints.NotNull;
+
+
+import jakarta.validation.constraints.NotNull;
 import pri.yqx.common.domain.request.CursorReq;
 
 public class ChatCursorReq extends CursorReq {
     private @NotNull Long userId;
     private @NotNull Long goodId;
 
-    public ChatCursorReq() {
-    }
 
     public void setUserId(final Long userId) {
         this.userId = userId;

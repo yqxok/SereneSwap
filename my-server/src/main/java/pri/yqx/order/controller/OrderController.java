@@ -1,6 +1,7 @@
 package pri.yqx.order.controller;
 
-import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pri.yqx.common.common.ThreadHolder;
@@ -16,7 +17,7 @@ import pri.yqx.order.service.OrderService;
 @RestController
 @RequestMapping({"/order"})
 public class OrderController {
-    @Resource
+    @Autowired
     private OrderService orderService;
 
 
