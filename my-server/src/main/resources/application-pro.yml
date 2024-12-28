@@ -1,4 +1,4 @@
-storage:
+storage: #临时存储配置
   tmp-file: /tmp/tmp.jpg
   tmp-file1: /tmp/tmp1.jpg
 logging:

@@ -1,4 +1,4 @@
-FROM java:8
+FROM java:17
 ADD my-server-1.0-SNAPSHOT.jar app.jar
 EXPOSE 7001 7002
 ##容器时区和宿主机不一致,需要调整容器时区

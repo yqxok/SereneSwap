@@ -25,9 +25,7 @@ public class Good {
     @TableId
     private Long goodId;
     private String html;
-    @TableField(
-        typeHandler = PicUrlJsonHandler.class
-    )
+    @TableField(typeHandler = PicUrlJsonHandler.class)
     private List<PicUrl> picUrls;
     private BigDecimal price;
     private Integer status;

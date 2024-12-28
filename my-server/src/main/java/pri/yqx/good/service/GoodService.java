@@ -25,4 +25,5 @@ public interface GoodService extends IService<Good> {
     Long updateGood(Long userId, GoodReq goodDto);
 
     void updateGoodById(Good good);
+//    List<GoodVo> listGoodVoByUserId(Long userId);
 }

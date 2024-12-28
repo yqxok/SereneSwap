@@ -7,6 +7,13 @@ spring:
     #  格式化返回时间 yyyy-MM-dd HH:mm:ss
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  ai:
+    openai:
+      base-url: https://chatapi.littlewheat.com
+      api-key: sk-OwJ9nvwd3qRbkaNTSVp9zJaKKma0lnOWqjngtUdR2erOPcoD
+      chat:
+        options:
+          model: gpt-3.5-turbo
   servlet:
     multipart:
       max-file-size: 100MB
