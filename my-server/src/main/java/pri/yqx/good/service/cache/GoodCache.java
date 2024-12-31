@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import pri.yqx.common.constant.RedisKey;
 import pri.yqx.common.service.cache.AbstractMutiCache;
 import pri.yqx.common.service.cache.RedisCache;
 import pri.yqx.good.dao.GoodCatogryDao;
@@ -28,11 +29,6 @@ import pri.yqx.good.domain.enums.GoodStatusEnums;
 public class GoodCache extends AbstractMutiCache<Good> implements RedisCache<Good> {
     @Autowired
     private GoodDao goodDao;
-    @Autowired
-    private GoodCatogryDao goodCatogryDao;
-
-    public GoodCache() {
-    }
 
     protected String getRedisKey() {
         return "good_info";
@@ -62,18 +58,18 @@ public class GoodCache extends AbstractMutiCache<Good> implements RedisCache<Goo
         });
     }
 
-    @Cacheable(value = {"good_info"}, key = "#id")
+    @Cacheable(value = RedisKey.BASE_KEY+ RedisKey.GOOD_INFO, key = "#id")
     public Good getCache(Long id) {
-        return (Good)this.goodDao.getById(id);
+        return this.goodDao.getById(id);
     }
 
-    @Cacheable(value = {"good_info"}, key = "#id")
+    @Cacheable(value = RedisKey.BASE_KEY+ RedisKey.GOOD_INFO, key = "#id")
     public Good getPhysicExitCache(Long id) {
         return this.goodDao.lambdaQuery().eq(Good::getGoodId, id).eq(Good::getStatus, GoodStatusEnums.UNSELL.getStatus())
                 .eq(Good::getIsDeleted, false).one();
     }
 
-    @CacheEvict(value = {"good_info"}, key = "#id")
+    @CacheEvict(value = RedisKey.BASE_KEY+ RedisKey.GOOD_INFO, key = "#id")
     public void rmCache(Long id) {
     }
 }

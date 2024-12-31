@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import pri.yqx.common.constant.RedisKey;
 import pri.yqx.common.service.cache.AbstractMutiCache;
 import pri.yqx.common.service.cache.RedisCache;
 import pri.yqx.user.dao.UserDao;
@@ -27,11 +28,8 @@ public class UserCache extends AbstractMutiCache<User> implements RedisCache<Use
     @Autowired
     private UserDao userDao;
 
-    public UserCache() {
-    }
-
     protected String getRedisKey() {
-        return "userInfo";
+        return RedisKey.USER_INFO;
     }
 
     protected Function<User, Long> getEntityId() {
@@ -58,26 +56,17 @@ public class UserCache extends AbstractMutiCache<User> implements RedisCache<Use
         });
     }
 
-    @Cacheable(
-        cacheNames = {"userInfo"},
-        key = "#id"
-    )
+    @Cacheable(cacheNames = RedisKey.BASE_KEY+RedisKey.USER_INFO, key = "#id")
     public User getCache(Long id) {
-        return (User)this.userDao.getById(id);
+        return this.userDao.getById(id);
     }
 
-    @Cacheable(
-        cacheNames = {"userInfo"},
-        key = "#id"
-    )
+    @Cacheable(cacheNames = RedisKey.BASE_KEY+RedisKey.USER_INFO, key = "#id")
     public User getPhysicExitCache(Long id) {
         return this.userDao.lambdaQuery().eq(User::getUserId, id).eq(User::getIsDeleted, false).one();
     }
 
-    @CacheEvict(
-        cacheNames = {"userInfo"},
-        key = "#id"
-    )
+    @CacheEvict(cacheNames = RedisKey.BASE_KEY+RedisKey.USER_INFO, key = "#id")
     public void rmCache(Long id) {
     }
 }

@@ -36,25 +36,25 @@ public abstract class AbstractMutiCache<T> implements MutiCache<T> {
 
     public Map<Long, T> getCacheMap(Set<Long> ids, QueryHandler<T> handler) {
         if (CollectionUtil.isEmpty(ids)) {
-            return new HashMap();
+            return new HashMap<>();
         } else {
-            List<String> keys = (List)ids.stream().map((i) -> {
+            List<String> keys = ids.stream().map((i) -> {
                 return RedisKey.getRedisKey(this.getRedisKey(), i);
             }).collect(Collectors.toList());
             List<T> list = RedisUtil.mutiGet(keys, this.outClass);
-            Map<Long, T> collect = (Map)list.stream().filter(Objects::nonNull).collect(Collectors.toMap(this.getEntityId(), Function.identity()));
-            List<Long> nofitIds = (List)ids.stream().filter((i) -> {
+            Map<Long, T> collect = list.stream().filter(Objects::nonNull).collect(Collectors.toMap(this.getEntityId(), Function.identity()));
+            List<Long> nofitIds = ids.stream().filter((i) -> {
                 return !collect.containsKey(i);
             }).collect(Collectors.toList());
             if (CollectionUtil.isNotEmpty(nofitIds)) {
-                LambdaQueryWrapper<T> wrapper = new LambdaQueryWrapper();
+                LambdaQueryWrapper<T> wrapper = new LambdaQueryWrapper<>();
                 handler.handle(wrapper, nofitIds);
                 List<T> entities = this.getIService().list(wrapper);
-                Map<String, T> noFitMap = (Map)entities.stream().collect(Collectors.toMap((i) -> {
+                Map<String, T> noFitMap = entities.stream().collect(Collectors.toMap((i) -> {
                     return RedisKey.getRedisKey(this.getRedisKey(), this.getIdFuc(i));
                 }, Function.identity()));
                 RedisUtil.mutiSet(noFitMap, 1800L);
-                collect.putAll((Map)entities.stream().collect(Collectors.toMap(this.getEntityId(), Function.identity())));
+                collect.putAll(entities.stream().collect(Collectors.toMap(this.getEntityId(), Function.identity())));
             }
 
             return collect;

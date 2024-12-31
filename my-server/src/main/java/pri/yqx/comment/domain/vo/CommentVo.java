@@ -26,9 +26,7 @@ public class CommentVo {
     private Boolean putAwayComment;
     private Integer initSize;
     private CmCursorPageVo<CommentSonVo> sonComments;
-    @JSONField(
-        serializeUsing = CreateTimeSerializer.class
-    )
+    @JSONField(serializeUsing = CreateTimeSerializer.class)
     private LocalDateTime createTime;
 
 
