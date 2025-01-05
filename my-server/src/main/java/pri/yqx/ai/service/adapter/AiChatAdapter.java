@@ -21,7 +21,7 @@ public class AiChatAdapter {
             return aiChatVo;
         }).collect(Collectors.toList());
 
-        TimeConverterUtil.convertTime(collect,"SendTime",AiChatVo.class);
+//        TimeConverterUtil.convertTime(collect,"SendTime",AiChatVo.class);
 
         return collect;
     }

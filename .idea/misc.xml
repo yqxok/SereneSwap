@@ -9,6 +9,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/spring-ai/pom.xml" />
         <option value="$PROJECT_DIR$/wx-server/pom.xml" />
       </set>
     </option>

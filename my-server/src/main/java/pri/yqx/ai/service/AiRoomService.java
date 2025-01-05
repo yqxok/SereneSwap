@@ -11,4 +11,10 @@ public interface AiRoomService extends IService<AiRoom> {
     Long createRoom(Long userId);
 
     List<AiChatRoomVo> getRooms(Long userId);
+
+
+
+    void updateRoomName(Long userId, Long roomId, String roomName);
+
+    void deleteRoom(Long aLong, Long roomId);
 }

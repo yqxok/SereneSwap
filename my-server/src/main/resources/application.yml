@@ -10,7 +10,7 @@ spring:
   ai:
     openai:
       base-url: https://chatapi.littlewheat.com
-      api-key: sk-SECQyWYUk4YnotW4x7tpV7pqX0nb3Chn72IIU38pK1WgUVXW
+      api-key: sk-mtgAMrH8xhMdjhakN7hQKjy6yfk7IQPjFFeqBklYdWMRZDTW
       chat:
         options:
           model: gpt-3.5-turbo

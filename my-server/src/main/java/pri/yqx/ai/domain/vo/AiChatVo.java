@@ -14,7 +14,7 @@ public class AiChatVo {
     private Integer type;
     private Long roomId;
     private LocalDateTime createTime;
-    private String sendTime;
+//    private String sendTime;
     private String content;
     private List<Goods> goods;
     @Data

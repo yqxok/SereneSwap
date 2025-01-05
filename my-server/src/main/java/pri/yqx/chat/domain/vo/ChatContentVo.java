@@ -13,5 +13,5 @@ public class ChatContentVo {
     private Long receiveUserId;
     private String content;
     private LocalDateTime createTime;
-    private String sendTime;//前端展示消息时间
+
 }

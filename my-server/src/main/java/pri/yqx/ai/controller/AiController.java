@@ -1,5 +1,6 @@
 package pri.yqx.ai.controller;
 //
+import cn.hutool.core.io.resource.ResourceUtil;
 import com.alibaba.fastjson.JSON;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +16,10 @@ import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.reader.JsonReader;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.FileUrlResource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pri.yqx.ai.domain.entity.AiChat;
@@ -35,6 +39,7 @@ import reactor.core.publisher.Flux;
 import  cn.hutool.core.io.file.FileReader;
 import java.io.*;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +53,9 @@ public class AiController {
     private final ChatClient chatClient;
     @Autowired
     private AiChatService aiChatService;
+
+    @Value("${ai.json-file}")
+    private String jsonFile;
 
     @Data
     static public class AiGood{
@@ -70,9 +78,8 @@ public class AiController {
             return aiGood;
         }).collect(Collectors.toList());
         String s=JSON.toJSONString(collect);
-        URL url = Thread.currentThread().getContextClassLoader().getResource("data.json");
-        log.info("路径:{}",url.getPath());
-        BufferedWriter writer=new BufferedWriter(new FileWriter(url.getPath()));
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(jsonFile),"UTF-8"));
+
         writer.write(s);
         writer.flush();
     }
@@ -87,13 +94,18 @@ public class AiController {
                 log.error("数据写入json文件异常");
                 throw new RuntimeException(e);
             }
-            JsonReader jsonReader = new JsonReader(new ClassPathResource("data.json"));
+            JsonReader jsonReader = null;
+            try {
+                jsonReader = new JsonReader(new FileSystemResource(jsonFile));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             store.add(jsonReader.get());
         }).start();
 
-        ClassPathResource resource = new ClassPathResource("system_prompt.txt");
+
 //        new FileReader()
-        this.chatClient=chatClientBuilder.defaultSystem(new FileReader(resource.getPath()).readString())
+        this.chatClient=chatClientBuilder.defaultSystem(ResourceUtil.readUtf8Str("system_prompt.txt"))
                 .defaultAdvisors(new QuestionAnswerAdvisor(store)).build();
 //        InMemoryChatMemory memory = new InMemoryChatMemory();
 //        memory.add("1",new UserMessage("我的名字叫熊大,请记住"));
@@ -121,7 +133,6 @@ public class AiController {
     public Result<List<AiChatVo>> getAiChats(@PathVariable Long roomId){
        List<AiChat> list= aiChatService.getAiChats(roomId);
        List<AiChatVo> aiChatVos = AiChatAdapter.build(list);
-
        return Result.success(aiChatVos);
     }
 
@@ -140,7 +151,6 @@ public class AiController {
             else
                 messages.add(new UserMessage(i.getContent()));
         });
-
         return chatClient.prompt(new Prompt(messages)).user(aigcReq.getMessage())
                 .stream().content();
     }

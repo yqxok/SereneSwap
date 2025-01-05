@@ -1,7 +1,8 @@
 storage:
   tmp-file: D:\\img\\tmp\\tmp.jpg
   tmp-file1: D:\\img\\tmp\\tmp1.jpg
-
+ai:
+  json-file: D:\\img\\tmp\\data.json
 
 
 

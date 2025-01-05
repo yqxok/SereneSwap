@@ -10,7 +10,6 @@
     <modules>
         <module>my-server</module>
         <module>sensitive-grep</module>
-        <module>spring-ai</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -13,6 +13,7 @@ import pri.yqx.ai.mapper.AiRoomMapper;
 import pri.yqx.ai.service.AiRoomService;
 import pri.yqx.common.common.ThreadHolder;
 import pri.yqx.common.constant.RedisKey;
+import pri.yqx.common.util.AssertUtil;
 import pri.yqx.common.util.MyBeanUtils;
 
 import java.util.List;
@@ -32,8 +33,27 @@ public class AiRoomServiceImpl extends AiRoomDao implements AiRoomService {
 
     @Override
     public List<AiChatRoomVo> getRooms(Long userId) {
-        List<AiRoom> list = this.lambdaQuery().eq(AiRoom::getUserId, userId).list();
+        List<AiRoom> list = this.lambdaQuery().eq(AiRoom::getUserId, userId).eq(AiRoom::getIsDeleted,false)
+                .orderByDesc(AiRoom::getCreateTime).list();
         return list.stream().map(i->MyBeanUtils.copyProperties(i,new AiChatRoomVo())).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void updateRoomName(Long userId, Long roomId, String title) {
+        AiRoom one = this.lambdaQuery().eq(AiRoom::getUserId, userId).eq(AiRoom::getRoomId, roomId).one();
+        AssertUtil.isEmpty(one,"该会话不存在");
+        one.setRoomName(title);
+        this.updateById(one);
+    }
+
+    @Override
+    @Transactional
+    public void deleteRoom(Long userId, Long roomId) {
+        AiRoom one = this.lambdaQuery().eq(AiRoom::getUserId, userId).eq(AiRoom::getRoomId, roomId).one();
+        AssertUtil.isEmpty(one,"该会话不存在");
+        one.setIsDeleted(true);
+        this.updateById(one);
     }
 
 
