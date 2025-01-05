@@ -15,6 +15,28 @@ create table wx_address
 )
     comment '地址表' charset = utf8mb4;
 
+create table wx_ai_chat
+(
+    chat_id     bigint     not null
+        primary key,
+    type        tinyint(1) not null comment '0ai消息，1用户消息',
+    room_id     bigint     null comment '逻辑外键，与aide',
+    create_time datetime   not null comment '消息发送时间',
+    content     text       not null comment '消息发送的内容',
+    goods       text       not null comment 'json字符串'
+);
+
+create table wx_ai_room
+(
+    room_id     bigint                                not null comment '会话id'
+        primary key,
+    user_id     bigint                                not null comment '用户id',
+    create_time datetime                              not null,
+    is_deleted  tinyint(1)   default 0                null,
+    room_name   varchar(255) default '没有命名的会话' not null comment '会话名'
+)
+    comment '与ai的一次会话';
+
 create table wx_category
 (
     category_name varchar(255)             not null comment '分类名称,唯一且不为空'
@@ -42,7 +64,7 @@ create table wx_chat_content
     is_deleted      int default 0 null,
     good_id         bigint        not null,
     room_key        bigint        not null comment 'send_user_id+receive_user_id+good_id，组成key',
-    
+   
 )
 comment ' 聊天记录 ' charset=utf8mb4;
 
@@ -112,8 +134,6 @@ create table wx_comment_son
     good_job_num   int default 0 null comment '被点赞数',
     reply_id       bigint        not null comment '回复的用户id',
     user_id        bigint        not null comment '评论人id',
-    constraint wx_comment_son_pk
-        unique (good_job_num, create_time),
     constraint chk_son_good_job_num
         check (`good_job_num` >= 0)
 );
